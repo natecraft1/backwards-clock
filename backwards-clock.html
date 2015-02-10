@@ -8,11 +8,7 @@
 	body {
 		font-family: 'Helvetica';
 	}
-	h2 {
-		top: 150px;
-		left: 193px;
-		position: absolute;
-	}
+
 	#circle {
 		border-radius: 50%;
 		height: 200px;
@@ -22,45 +18,76 @@
 		left: 200px;
 		background-color: #FF9F9F;
 	}
+	#inner-circle {
+		position: absolute;
+		top: 17px;
+		left: 17px;
+		background-color: #fff;
+		height: 166px;
+		width: 166px;
+		border-radius: 50%;
+	}
+	#inner-ring {
+		position: absolute;
+		background-color: #CFF4FF;
+		height: 100px;
+		width: 100px;
+		border-radius: 50%;
+		top: 50px;
+		left: 50px;
+	}
+	#inner-circle-2 {
+		position: absolute;
+		background-color: #fff;
+		border-radius: 50%;
+		top: 64px;
+		left: 64px;
+		width: 72px;
+		height: 72px;
+	}
 	.t {
 		position: absolute;
 		font-size: 11px;
 		color: #fff;
 	}
-	#seconds {
-		width: 160px;
+	.h {
 		height: 1px;
 		display: block;
 		position: absolute;
 		top: 100px;
-		left: 21px;
-		transform: rotate(270deg);
+
+	}
+	#seconds {
+		width: 280px;
+		left: -40px;
 	}
 	#hours {
-		width: 120px;
-		height: 1px;
-		display: block;
-		position: absolute;
-		top: 100px;
-		left: 43px;
+		width: 60px;
+		left: 71px;
 	}
 	#minutes {
-		width: 140px;
-		height: 1px;
-		display: block;
-		position: absolute;
-		top: 100px;
-		left: 31.5px;
+		width: 160px;
+		left: 20px;
 	}
 	.hand {
 		border-bottom: 1px solid #333;
 		float: right;
-		width: 56%;
+	}
+	#sec_hand {
+		width: 10%;
+	}
+	#min_hand {
+		width: 16%;
+	}
+	#hr_hand {
+		width: 40%;
 	}
 </style>
 <body>
-	<h2>BACKWARDS CLOCK</h2>
 	<div id="circle">
+		<div id="inner-circle"></div>
+		<div id="inner-ring"></div>
+		<div id="inner-circle-2"></div>
 		<span id="12" class="t">12</span>
 		<span id="11" class="t">11</span>
 		<span id="10" class="t">10</span>
@@ -73,9 +100,9 @@
 		<span id="3" class="t">3</span>
 		<span id="2" class="t">2</span>
 		<span id="1" class="t">1</span>
-		<span id="seconds"><span class="hand"></span></span>
-		<span id="hours"><span class="hand"></span></span>
-		<span id="minutes"><span class="hand"></span></span>
+		<span id="seconds" class="h"><span id="sec_hand" class="hand"></span></span>
+		<span id="hours" class="h"><span id="hr_hand" class="hand"></span></span>
+		<span id="minutes" class="h"><span id="min_hand" class="hand"></span></span>
 	</div>
 </body>
 <script>
