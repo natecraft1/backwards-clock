@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	#circle {
+		border-radius: 50%;
+		border: 1px solid #333;
+		height: 200px;
+		width: 200px;
+		position: relative;
+		top: 200px;
+		left: 200px;
+	}
+	#middle-circle {
+		position: relative;
+		margin-top: 99px;
+		margin-left: 99px;
+		background-color: #333;
+		border-radius: 50%;
+		height: 4px;
+		width: 4px;
+	}
+	.t {
+		position: absolute;
+	}
+	#seconds {
+		width: 160px;
+		height: 1px;
+		display: block;
+		position: absolute;
+		top: 100px;
+		left: 21px;
+		transform: rotate(270deg);
+	}
+	#hours {
+		width: 120px;
+		height: 1px;
+		display: block;
+		position: absolute;
+		top: 100px;
+		left: 43px;
+	}
+	#minutes {
+		width: 140px;
+		height: 1px;
+		display: block;
+		position: absolute;
+		top: 100px;
+		left: 31.5px;
+	}
+	.hand {
+		border-bottom: 1px solid #333;
+		float: right;
+		width: 70%;
+	}
+</style>
+<body>
+	<div id="circle">
+		<div id="middle-circle"></div>
+		<span id="12" class="t">12</span>
+		<span id="11" class="t">11</span>
+		<span id="10" class="t">10</span>
+		<span id="9" class="t">9</span>
+		<span id="8" class="t">8</span>
+		<span id="7" class="t">7</span>
+		<span id="6" class="t">6</span>
+		<span id="5" class="t">5</span>
+		<span id="4" class="t">4</span>
+		<span id="3" class="t">3</span>
+		<span id="2" class="t">2</span>
+		<span id="1" class="t">1</span>
+		<span id="seconds"><span class="hand"></span></span>
+		<span id="hours"><span class="hand"></span></span>
+		<span id="minutes"><span class="hand"></span></span>
+	</div>
+</body>
+<script>
+	var radius = 90, offset = 94, rot, curr_rot = 270, p;
+	var second_hand = document.getElementById("seconds");
+	var hour_hand = document.getElementById("hours");
+	var min_hand = document.getElementById("minutes");
+	var times = Array.prototype.slice.call(document.getElementsByClassName("t"));
+	var t = times.length, te, d = new Date, total_seconds = 12 * 60 * 60;
+	var hours = d.getHours() > 12 ? d.getHours() - 12 : d.getHours();
+	var minutes = d.getMinutes();
+	var seconds = d.getSeconds();
+	var start = minutes * 60 + (hours * 60 * 60) + seconds;
+	var perc_done = start/total_seconds;
+
+	while (t > 0) {
+		te = document.getElementById("" + (t));
+		rot = 2*Math.PI*(((12-t+9)%12)/12);
+		te.style.left = (radius * Math.cos(rot) + offset + "px");
+		te.style.top = (radius * Math.sin(rot) + offset + "px");
+		t--;	
+	}
+	function updateClock (totalSeconds) {
+		var secs = (totalSeconds%60)/60;
+		var mins = (totalSeconds/60)%60/60;
+		var hrs = (totalSeconds/3600)%12/12;
+		second_hand.style.transform = "rotate(" + ((1-secs)*360-90) + "deg)";
+		min_hand.style.transform = "rotate(" + ((1-mins)*360-90) + "deg)";
+		hour_hand.style.transform = "rotate(" + ((1-hrs)*360-90) + "deg)";
+
+
+	}
+	updateClock(start);
+	setInterval(function() {
+		start++;
+		updateClock(start);
+
+	}, 1000);
+</script>
+
+</html>
